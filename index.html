@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        <title>jQuery Learning</title>
+        <script src="jquery-1.11.2.min.js" type="text/javascript"></script>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <body>
+        <h2>显示隐藏的控件</h2>
+        <div class="exercise show_div">
+            <div id="click_and_show">Works!</div>
+            <button onclick="sayHello()">Click</button>
+        
+            <script type="text/javascript">
+                function sayHello(){
+                    $("#click_and_show").show();
+                }
+            </script>
+        </div>
+        
+        <h2>改变文字内容</h2>
+        <div class="exercise change_text">
+            <div>Look at us!</div>
+            <div>We are gonna to change</div>
+            <button onclick="change_text()">Try me</button>
+        
+            <script type="text/javascript">
+                function change_text() {
+                    $(".change_text div ").html("After transformation");
+                }    
+            </script>
+        </div>
+
+        <h2>复制文字内容</h2>
+        <div class="exercise copy_text">
+            <div id="twin_older">底下那行要学我！</div>
+            <div id="twin_younger">其实我是上面那行的双胞胎妹妹</div>
+            <button onclick="copy_text()">点我</button>
+
+            <script type="text/javascript">
+                function copy_text() {
+                    $("#twin_younger").html($("#twin_older").html());
+                }
+            </script>
+        </div>
+
+        <h2>让按钮不可用</h2>
+        <div class="exercise unablebutton">
+            <button id="unableb1" onclick="unablebutton()">点我右面按钮就不能用了</button>
+            <button id="unableb2">我是无辜的</button>
+
+            <script type="text/javascript">
+                function unablebutton(){
+                    $("#unableb2").attr("disabled","true");
+                }
+            </script>
+        </div>
+
+        <h2>显示类名称</h2>
+        <div class="exercise show_classname">
+            <div class="leader">同志们，向我看齐</div>
+            <div class="member">楼上是谁？</div>
+            <button onclick="show_classname()">看答案</button>
+
+            <script type="text/javascript">
+                function show_classname() {
+                    var $className = $(".leader").attr("class");
+                    $(".member").html($className);
+                }
+            </script>
+        </div>
+
+        <h2>选择一切</h2>
+        <div class="exercise unable_all"> 
+            <form action="#">
+                <input type="button" value="我是按钮" />
+                <input type="text" value="我是文本" />
+                <input type="radio" value="我是单选框" />
+                <input type="checkbox" value="我们可以复选"/>
+                <input type="checkbox" value="我们可以复选"/>
+                <input type="button" value="我是老鼠屎，点我，我们一家全完蛋" onclick="unable_all()" />
+            </form>
+
+            <script type="text/javascript">
+                function unable_all() {
+                    $("form *").attr("disabled","true");
+                }
+            </script>  
+        </div>
+
+        <h2>只选子辈，不选父辈</h2>
+        <div class="exercise only_want_child">
+            <div class="coderfamily">
+                码农家族
+                <label>我是大儿子</label>
+                <p>
+                    我是大女儿
+                    <label>我是外孙</label>
+                </p>
+                <label>我是二儿子</label>
+            </div>
+            <label>我是隔壁王叔叔</label>
+            <button onclick="show_child()">点我标出子辈</button>
+            
+            <script type="text/javascript">
+                function show_child() {
+                    $(".coderfamily>label").css("border","5px solid yellow");
+                }
+            </script>
+        </div>
+
+        <h2>紧邻选择器</h2>
+        <div class="exercise neighbor">
+            <label>我是Label</label>
+            <p>我是p1</p>
+            <span>我是span1</span>
+            <span>我是span2</span>
+            <p>我是p2</p>
+            <label>我是label2</label>
+            <button onclick="show_neighbor()">点我找出同div中P下面的SPAN</button>
+
+            <script type="text/javascript">
+                function show_neighbor() {
+                    $(".neighbor p+span").css("background-color","red");
+                }
+            </script>
+        </div>
+
+        <h2>选择后面全部相邻的元素</h2>
+        <div class="exercise all_downstairs">
+            <label>我是Label</label>
+            <p>我是p1</p>
+            <span>我是span1</span>
+            <span>我是span2</span>
+            <div>我是div1</div>
+            <span>我是span3</span>
+            <label>我是label2</label>
+            <span>我是span4</span>
+            <button onclick="show_downstairs()">点我找出同div中P下面所有的SPAN</button>
+
+            <script type="text/javascript">
+                function show_downstairs() {
+                    $(".all_downstairs p~span").css("background-color","red");
+                }
+            </script>
+        </div>
+    </body>
+</html>

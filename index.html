@@ -8,6 +8,8 @@
     </head>
     
     <body>
+        <div class="subline">基础选择器</div>
+
         <h2>显示隐藏的控件</h2>
         <div class="exercise show_div">
             <div id="click_and_show">Works!</div>
@@ -144,6 +146,233 @@
                 function show_downstairs() {
                     $(".all_downstairs p~span").css("background-color","red");
                 }
+            </script>
+        </div>
+
+        <div class="subline">过滤性选择器</div>
+
+        <h2>顺序过滤选择器1</h2>
+        <div class="exercise list_selection1"> 
+            <ol>
+                <li>first</li>
+                <li>second</li>
+                <li>third</li>
+                <li>last</li>
+            </ol>
+            <button onclick="show_which1()">请在心中默选一个，然后点我</button>
+            <br />
+            //只有第一个和最后一个可以用first和last调用，其他只能用下面一种方法
+
+            <script type="text/javascript">
+                function show_which1() {
+                    $(".list_selection1 li:last").css("background-color","red");
+                }
+            </script>
+        </div>
+
+        <h2>顺序过滤选择器2</h2>
+        <div class="exercise list_selection2"> 
+            <ul>
+                <li>first</li>
+                <li>second</li>
+                <li>third</li>
+                <li>last</li>
+            </ul>
+            <button onclick="show_which2()">请在心中默选一个，然后击我</button>
+            <br />
+            //可以选择任意一个
+
+            <script type="text/javascript">
+                function show_which2() {
+                    $(".list_selection2 li:eq(2)").css("background-color","red");
+                }
+            </script>
+        </div>
+
+        <h2>:contains(text)过滤选择器</h2>
+        <div class="exercise text_selection">
+            强大的文本选择
+            <ol>
+                <li>李白</li>
+                <li>王维</li>
+                <li>杜牧</li>
+                <li>李智璇</li>
+                <li>苏轼</li>
+            </ol>
+            <button onclick="text_selection()">标出李家人</button>
+
+            <script type="text/javascript">
+                function text_selection() {
+                    $(".text_selection li:contains('李')").css("background-color","red");
+                }
+            </script>
+        </div>
+
+        <h2>:has(selector)过滤选择器</h2>
+        <div class="exercise element_selection">
+            根据元素类型选择
+            <ol>
+                <li><p>我是P先生</p></li>
+                <li><label>L妹纸就是我</label></li>
+                <li><p>我也是P先生</p></li>
+                <li><label>我也是L妹纸哦</label></li>
+                <li><p>P先生就是我哦</p></li>
+            </ol>
+            <button onclick="element_s()">L妹纸在哪里？</button>
+
+            <script type="text/javascript">
+                function element_s() {
+                    $(".element_selection li:has('label')").css("background-color","red");
+                }
+            </script>
+        </div>
+
+        <h2>:hidden过滤选择器</h2>
+        <div class="exercise hidden_selection">
+            获取不可见元素
+            <div>我楼下会有人搬来住</div>
+            <div id="ground_floor"></div>
+            <input type="hidden" value="我是新住客" />
+            <button onclick="show_hidden()">点击我一楼入住</button>
+
+            <script type="text/javascript">
+                function show_hidden() {
+                    $("#ground_floor").html($("input:hidden").val());
+                }
+            </script>
+        </div>
+
+        <h2>:visible过滤选择器</h2>
+        <div class="exercise visible_selection">
+            获取可见的指定项目的所有元素,display不是none的所有该元素
+            <ul>
+                <li>赵</li>
+                <li style="display:none">钱</li>
+                <li>孙</li>
+                <li>李</li>
+                <li style="display:none">赵</li>
+                <li>钱</li>
+                <li>孙</li>
+                <li style="display:none">李</li>
+            </ul>
+            <button onclick="visible_s()">一键全消失</button>
+
+            <script type="text/javascript">
+                function visible_s() {
+                    $("li:visible").css("display","none");
+                }
+            </script>
+        </div>
+
+        <h2>[attribute=/!=value]属性选择器</h2>
+        <div class="exercise attr_seletion">
+            获取指定属性名和对应值的全部元素
+            <ol>
+                <li title="李智璇">桌子</li>
+                <li title="猪八戒">台灯</li>
+                <li title="李智璇">椅子</li>
+                <li title="猪八戒">数学书</li>
+                <li title="李智璇">英汉字典</li>
+                <li title="猪八戒">玫瑰花</li>
+                <li title="老王">电灯泡</li>
+                <li title="老王">香水</li>
+            </ol>
+            <button onclick="attr_s()">猪八戒的东西消失！</button>
+            <button onclick="attr_all()">显示全部</button>
+            <button onclick="notattr_s()">不是猪八戒的消失</button>
+
+            <script type="text/javascript">
+                function attr_s() {
+                    $("li[title='猪八戒']").hide();
+                }
+                function attr_all() {
+                    $("li").css("display","");
+                }
+                function notattr_s() {
+                    $("li[title!='猪八戒']").hide();
+                }
+            </script>
+        </div>
+
+        <h2>[attribute*=value]属性选择器</h2>
+        <div class="exercise blurry_selection">
+            强大的模糊搜索，attr里面只要含有value就行
+            <ul>
+                <li title="李智璇">桌子</li>
+                <li title="猪八戒">台灯</li>
+                <li title="李一">椅子</li>
+                <li title="猪八戒">数学书</li>
+                <li title="李春梅">英汉字典</li>
+                <li title="猪八戒">玫瑰花</li>
+                <li title="老王">电灯泡</li>
+                <li title="老李">香水</li>
+            </ul>
+            <button onclick="show_all_about()">李家的东西不算！</button>
+
+            <script type="text/javascript">
+                function show_all_about() {
+                    $("li[title*='李']").hide();
+                }
+            </script>
+        </div>
+
+        <h2>:first-child子元素过滤选择器</h2>
+        <div class="exercise f_c_s">
+            多个list，想同时选中第一个元素
+            <ul>
+                <li title="李智璇">桌子</li>
+                <li title="猪八戒">台灯</li>
+                <li title="李一">椅子</li>
+                <li title="猪八戒">数学书</li>
+                <li title="李春梅">英汉字典</li>
+                <li title="猪八戒">玫瑰花</li>
+                <li title="老王">电灯泡</li>
+                <li title="老李">香水</li>
+            </ul>
+            <ol>
+                <li title="李智璇">桌子</li>
+                <li title="猪八戒">台灯</li>
+                <li title="李一">椅子</li>
+                <li title="猪八戒">数学书</li>
+                <li title="李春梅">英汉字典</li>
+                <li title="猪八戒">玫瑰花</li>
+                <li title="老王">电灯泡</li>
+                <li title="老李">香水</li>
+            </ol>
+            <button onclick="f_c_s()">点我去掉开头</button>
+
+            <script type="text/javascript">
+                function f_c_s() {
+                    $("li:first-child").hide();
+                }
+            </script>
+        </div>
+
+        <h2 id="exercise1">试炼</h2>
+        <div class="exercise ex1">
+            <ol>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li style="display:none">4</li>
+                <li style="display:none">5</li>
+                <li>6</li>
+                <li>7</li>
+            </ol>
+            <a id="more" href="#exercise1">更多</a>
+            
+            <script type="text/javascript">
+                $("#more").click(
+                    function() {
+                        if ($(this).html()==("简化")) {
+                            $(this).html("更多");
+                            $(".ex1 li:lt(2)").hide();
+                        } else {
+                            $(this).html("简化");
+                            $("li").show();
+                        } 
+                    }
+                );
             </script>
         </div>
     </body>
